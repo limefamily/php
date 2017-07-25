@@ -6,6 +6,8 @@
 
 FROM debian:jessie
 
+COPY sources.list /etc/apt/sources.list
+
 # persistent / runtime deps
 ENV PHPIZE_DEPS \
 		autoconf \
@@ -102,6 +104,7 @@ RUN set -xe \
 		libxml2-dev \
 		zlib1g-dev \
 		libpng12-dev \
+		zlib1g-dev \
 	" \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
 	\
@@ -138,6 +141,8 @@ RUN set -xe \
 		--with-mysqli \
 		--with-pdo-mysql \
 		--with-gd \
+		--enable-zip \
+		--enable-bcmath \
 		\
 # bundled pcre is too old for s390x (which isn't exactly a good sign)
 # /usr/src/php/ext/pcre/pcrelib/pcre_jit_compile.c:65:2: error: #error Unsupported architecture
