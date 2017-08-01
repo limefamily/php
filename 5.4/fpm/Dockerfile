@@ -29,6 +29,8 @@ RUN apt-get update && apt-get install -y \
 		libxml2 \
 		xz-utils \
 		libpng12-0 \
+		libjpeg62-turbo \
+		libfreetype6 \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
 ENV PHP_INI_DIR /usr/local/etc/php
@@ -104,6 +106,8 @@ RUN set -xe \
 		libxml2-dev \
 		zlib1g-dev \
 		libpng12-dev \
+		libjpeg62-turbo-dev \
+		libfreetype6-dev \
 		zlib1g-dev \
 	" \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
@@ -141,6 +145,8 @@ RUN set -xe \
 		--with-mysqli \
 		--with-pdo-mysql \
 		--with-gd \
+		--with-jpeg-dir \
+		--with-freetype-dir \
 		--enable-zip \
 		--enable-bcmath \
 		\
